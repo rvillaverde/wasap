@@ -1,4 +1,4 @@
-const CACHE_NAME = "whatsapp-conv-v1";
+const CACHE_NAME = "whatsapp-conv-v2";
 const assets = [
   "/",
   "/index.html",

@@ -13,7 +13,7 @@ const handleChange = (field) => (e) => {
 
 const toggleSubmitButton = () => {
   document.getElementById("submit-button").disabled =
-    !message.text || message.text.length === 0 || !message.phone;
+    !message.phone || isNaN(message.phone);
 };
 
 const handleSubmit = (e) => {
@@ -21,7 +21,8 @@ const handleSubmit = (e) => {
   window.open(buildUrl(), "_blank");
 };
 
-const buildUrl = () => `${URL}?phone=${message.phone}&text=${message.text}`;
+const buildUrl = () =>
+  `${URL}?phone=${message.phone}&text=${message.text || ""}`;
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

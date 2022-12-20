@@ -15,11 +15,11 @@
 body {
   align-items: center;
   background-color: var(--medium-gray);
+  display: flex;
   justify-content: center;
   margin: 0;
-  padding: 60px 20px;
-  display: flex;
   min-height: 100vh;
+  padding: 20px;
 }
 
 main {
@@ -32,12 +32,13 @@ main {
 
 h1 {
   margin: 0;
+  line-height: 28px;
+  text-align: center;
 }
 
 .header {
   align-items: center;
   display: flex;
-  justify-content: space-between;
   margin: 0;
 }
 
@@ -63,6 +64,7 @@ h1 {
 .legend {
   color: var(--medium-gray);
   margin: 0;
+  margin-top: 12px;
 }
 
 .form {
@@ -75,12 +77,12 @@ h1 {
 }
 
 .form .form-row:not(:first-child) {
-  margin-top: 12px;
+  margin-top: 20px;
 }
 
 .form label {
   color: var(--medium-gray);
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .form input, .form textarea, .form button {
