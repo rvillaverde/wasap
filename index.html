@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Whatsapp message</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <main>
+      <div class="header">
+        <h1>Whatsapp message</h1>
+      </div>
+
+      <p class="legend">
+        Create a new Whatsapp conversation.
+      </p>
+      
+      <form class="form" id="form">
+        <div class="form-row">
+          <label for="phone">Phone</label>
+          <input type="number" id="phone"></input>
+        </div>
+        <div class="form-row">
+          <label for="phone">Text</label>
+          <textarea id="text" rows="4"></textarea>
+        </div>
+        <div class="form-row">
+          <button class="submit-button" disabled id="submit-button" type="submit">Send</button>
+        </div>
+      </form>
+    </main>
+    <script src="js/script.js"></script>
+  </body>
+</html>
