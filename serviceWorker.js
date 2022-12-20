@@ -1,9 +1,8 @@
-const staticWhatsappConversation = "whatsapp-conversation-v1";
+const CACHE_NAME = "whatsapp-conv-v1";
 const assets = [
   "/",
   "/index.html",
   "/manifest.json",
-  "/assets/",
   "/css/style.css",
   "/css/lato.css",
   "/js/script.js",
@@ -11,10 +10,17 @@ const assets = [
 
 self.addEventListener("install", (installEvent) => {
   installEvent.waitUntil(
-    caches.open(staticWhatsappConversation).then((cache) => {
+    caches.open(CACHE_NAME).then((cache) => {
       cache.addAll(assets);
     })
   );
+});
+
+self.addEventListener("activate", async () => {
+  const existingCaches = await caches.keys();
+  console.log("activate - existing caches", existingCaches);
+  const invalidCaches = existingCaches.filter((c) => c !== CACHE_NAME);
+  await Promise.all(invalidCaches.map((ic) => caches.delete(ic)));
 });
 
 self.addEventListener("fetch", (fetchEvent) => {
