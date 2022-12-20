@@ -1,4 +1,5 @@
-const CACHE_NAME = "whatsapp-conv-v2";
+const VERSION = 3;
+const CACHE_NAME = `whatsapp-conv-v${VERSION}`;
 const assets = [
   "/",
   "/index.html",
@@ -24,11 +25,9 @@ self.addEventListener("activate", async () => {
 });
 
 self.addEventListener("fetch", (fetchEvent) => {
-  console.log("fetch event", fetchEvent.request);
   fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then((res) => {
-      console.log("caches match?", res);
-      return res || fetch(fetchEvent.request);
-    })
+    caches
+      .match(fetchEvent.request)
+      .then((res) => res || fetch(fetchEvent.request))
   );
 });

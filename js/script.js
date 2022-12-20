@@ -33,8 +33,17 @@ if ("serviceWorker" in navigator) {
   });
 }
 
+const documentHeight = () =>
+  document.documentElement.style.setProperty(
+    "--doc-height",
+    `${window.innerHeight}px`
+  );
+
 document.getElementById("form").addEventListener("submit", handleSubmit);
 document
   .getElementById("phone")
   .addEventListener("keyup", handleChange("phone"));
 document.getElementById("text").addEventListener("keyup", handleChange("text"));
+
+window.addEventListener("resize", documentHeight);
+documentHeight();
