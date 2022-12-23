@@ -22,7 +22,9 @@ const handleSubmit = (e) => {
 };
 
 const buildUrl = () =>
-  `${URL}?phone=${message.phone}&text=${message.text || ""}`;
+  `${URL}?phone=${message.phone}&text=${encodeURIComponent(
+    message.text || ""
+  )}`;
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -43,7 +45,13 @@ document.getElementById("form").addEventListener("submit", handleSubmit);
 document
   .getElementById("phone")
   .addEventListener("keyup", handleChange("phone"));
+document
+  .getElementById("phone")
+  .addEventListener("change", handleChange("phone"));
 document.getElementById("text").addEventListener("keyup", handleChange("text"));
+document
+  .getElementById("text")
+  .addEventListener("change", handleChange("text"));
 
 window.addEventListener("resize", documentHeight);
 documentHeight();

@@ -1,5 +1,5 @@
-const VERSION = 3;
-const CACHE_NAME = `whatsapp-conv-v${VERSION}`;
+const VERSION = 6;
+const CACHE_NAME = `whatsapp-chat-v${VERSION}`;
 const assets = [
   "/",
   "/index.html",
@@ -10,18 +10,28 @@ const assets = [
 ];
 
 self.addEventListener("install", (installEvent) => {
+  console.log("Install service worker");
+
   installEvent.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      cache.addAll(assets);
+      cache.addAll(assets).then(self.skipWaiting());
     })
   );
 });
 
 self.addEventListener("activate", async () => {
-  const existingCaches = await caches.keys();
-  console.log("activate - existing caches", existingCaches);
-  const invalidCaches = existingCaches.filter((c) => c !== CACHE_NAME);
-  await Promise.all(invalidCaches.map((ic) => caches.delete(ic)));
+  console.log("Activate service worker");
+
+  return caches.keys().then((existingCaches) =>
+    Promise.all(
+      existingCaches
+        .filter((c) => c !== CACHE_NAME)
+        .map((c) => {
+          console.log("Deleting cache:", c);
+          return caches.delete(c);
+        })
+    )
+  );
 });
 
 self.addEventListener("fetch", (fetchEvent) => {

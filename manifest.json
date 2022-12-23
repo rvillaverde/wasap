@@ -1,6 +1,6 @@
 {
-  "name": "WhatsApp Conversation",
-  "short_name": "WhatsappConv",
+  "name": "New WhatsApp conversation",
+  "short_name": "Whatsapp Chat",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#25d366",
