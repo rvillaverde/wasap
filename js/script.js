@@ -3,6 +3,11 @@ const message = {
   text: "",
 };
 
+Object.getPrototypeOf(message).isValid = () =>
+  !!message.phone &&
+  !isNaN(message.phone) &&
+  Number.isInteger(Number(message.phone));
+
 const URL = "https://api.whatsapp.com/send";
 
 const handleChange = (field) => (e) => {
@@ -12,8 +17,21 @@ const handleChange = (field) => (e) => {
 };
 
 const toggleSubmitButton = () => {
-  document.getElementById("submit-button").disabled =
-    !message.phone || isNaN(message.phone);
+  submitButton.disabled = !message.isValid();
+};
+
+const handleCopy = () => {
+  if (message.isValid()) {
+    return navigator.clipboard.writeText(buildUrl()).then(
+      () => {
+        copyLinkParagraph.classList.add("confirm");
+        setTimeout(() => copyLinkParagraph.classList.remove("confirm"), 2000);
+      },
+      () => console.log("Failed to copy message")
+    );
+  }
+
+  console.log("Failed to copy message: phone is not valid.");
 };
 
 const handleSubmit = (e) => {
@@ -30,7 +48,7 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker
       .register("/serviceWorker.js")
-      .then((res) => console.log("service worker registered"))
+      .then(() => console.log("service worker registered"))
       .catch((err) => console.log("service worker not registered", err));
   });
 }
@@ -41,17 +59,17 @@ const documentHeight = () =>
     `${window.innerHeight}px`
   );
 
-document.getElementById("form").addEventListener("submit", handleSubmit);
-document
-  .getElementById("phone")
-  .addEventListener("keyup", handleChange("phone"));
-document
-  .getElementById("phone")
-  .addEventListener("change", handleChange("phone"));
-document.getElementById("text").addEventListener("keyup", handleChange("text"));
-document
-  .getElementById("text")
-  .addEventListener("change", handleChange("text"));
+const form = document.getElementById("form");
+const phoneInput = document.getElementById("phone");
+const textInput = document.getElementById("text");
+const submitButton = document.getElementById("submit-button");
+const copyButton = document.getElementById("copy-button");
+const copyLinkParagraph = document.getElementById("copy-link");
+
+form.addEventListener("submit", handleSubmit);
+phoneInput.addEventListener("input", handleChange("phone"));
+textInput.addEventListener("input", handleChange("text"));
+copyButton.addEventListener("click", handleCopy);
 
 window.addEventListener("resize", documentHeight);
 documentHeight();
