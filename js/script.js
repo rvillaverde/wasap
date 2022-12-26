@@ -1,3 +1,5 @@
+const URL = "https://api.whatsapp.com/send";
+
 const message = {
   phone: undefined,
   text: "",
@@ -8,8 +10,21 @@ Object.getPrototypeOf(message).isValid = () =>
   !isNaN(message.phone) &&
   Number.isInteger(Number(message.phone));
 
-const URL = "https://api.whatsapp.com/send";
+const getElementById = (id) => document.getElementById(id);
 
+const clearButton = getElementById("clear-button");
+const copyButton = getElementById("copy-button");
+const copyLinkParagraph = getElementById("copy-link");
+const form = getElementById("form");
+const phoneInput = getElementById("phone");
+const submitButton = getElementById("submit-button");
+const textInput = getElementById("text");
+
+const infoIcon = getElementById("info-icon");
+const infoMessage = getElementById("info-message");
+const closeInfoButton = getElementById("close-info-button");
+
+/* Handlers */
 const handleChange = (field) => (e) => {
   const value = e.target.value;
   message[field] = value;
@@ -46,10 +61,25 @@ const handleSubmit = (e) => {
   window.open(buildUrl(), "_blank");
 };
 
+function handleOpenInfo() {
+  infoMessage.classList.add("open");
+}
+
+function handleCloseInfo() {
+  infoMessage.classList.remove("open");
+}
+
+/* Helpers */
 const buildUrl = () =>
   `${URL}?phone=${message.phone}&text=${encodeURIComponent(
     message.text || ""
   )}`;
+
+const documentHeight = () =>
+  document.documentElement.style.setProperty(
+    "--doc-height",
+    `${window.innerHeight}px`
+  );
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -60,25 +90,14 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-const documentHeight = () =>
-  document.documentElement.style.setProperty(
-    "--doc-height",
-    `${window.innerHeight}px`
-  );
-
-const clearButton = document.getElementById("clear-button");
-const copyButton = document.getElementById("copy-button");
-const copyLinkParagraph = document.getElementById("copy-link");
-const form = document.getElementById("form");
-const phoneInput = document.getElementById("phone");
-const submitButton = document.getElementById("submit-button");
-const textInput = document.getElementById("text");
-
 form.addEventListener("submit", handleSubmit);
 phoneInput.addEventListener("input", handleChange("phone"));
 textInput.addEventListener("input", handleChange("text"));
 copyButton.addEventListener("click", handleCopy);
 clearButton.addEventListener("click", handleClear);
+
+infoIcon.addEventListener("click", handleOpenInfo);
+closeInfoButton.addEventListener("click", handleCloseInfo);
 
 window.addEventListener("resize", documentHeight);
 documentHeight();

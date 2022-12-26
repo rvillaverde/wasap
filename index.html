@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
   <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#495057" />
   <!-- ios support -->
   <link rel="apple-touch-icon" href="images/icons/icon-72x72.png" />
   <link rel="apple-touch-icon" href="images/icons/icon-96x96.png" />
@@ -45,22 +46,47 @@
           <button class="submit-button" disabled id="submit-button" type="submit">
             Open conversation
           </button>
-          <p class="copy-link" id="copy-link">
-            <span class="confirmation">
+          <div class="copy-link" id="copy-link">
+            <p class="confirmation">
               Link copied to clipboard!
-            </span>
-            <span>
+            </p>
+            <p>
               or
               <button class="ghost-button" disabled id="copy-button" type="button">
                 copy to clipboard
               </button>
               if you're offline.
-            </span>
-          </p>
+              <span class="info-icon" id="info-icon">
+                <i>i</i>
+              </span>
+            </p>
+          </div>
+          </div>
         </div>
       </div>
     </form>
   </main>
+
+  <div class="info-message" id="info-message">
+    <div class="info-message-content">
+      <div class="info-message-body">
+        <p>
+          If you're offline, WhatsApp won't be able to find the account for that number.
+          <br />
+          <br />
+          You can save a link for later to open the conversation once you're back online.
+          <br />
+          <br />
+          Just copy it to the clipboard and paste it in whatever app you use for taking notes in your phone.
+        </p>
+      </div>
+
+      <button class="primary-button" id="close-info-button" type="button">
+        Got it
+      </button>
+    </div>
+  </div>
+
   <script src="js/script.js"></script>
 </body>
 

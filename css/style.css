@@ -43,6 +43,44 @@ body {
   padding: 1.4rem;
 }
 
+.info-message {
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: width 300ms ease-out;
+  width: 0;
+}
+
+.info-message.open {
+  width: 100%;
+}
+
+.info-message-content {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 3rem;
+  width: 100vw;
+}
+
+.info-message-content .action-button {
+  flex-shrink: 0;
+  font-size: 0.6rem;
+}
+
+.info-message-body {
+  margin: auto;
+  padding-top: 0;
+}
+
+.info-message p {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
 main {
   background-color: var(--white);
   border-radius: 8px;
@@ -74,6 +112,11 @@ button {
   user-select: none;
 }
 
+button:disabled {
+  pointer-events: none;
+}
+
+.primary-button,
 .submit-button {
   border-color: var(--dark-gray);
   color: var(--dark-gray);
@@ -85,21 +128,32 @@ button {
   transition: letter-spacing 100ms ease-out;
 }
 
+.primary-button:hover 
 .submit-button:hover {
   letter-spacing: 2px;
 }
 
+.primary-button:active,
 .submit-button:active {
   letter-spacing: 0px;
 }
 
-button:disabled {
-  pointer-events: none;
-}
-
+.primary-button:disabled,
 .submit-button:disabled {
   border-color: var(--light-gray);
   color: var(--light-gray);
+}
+
+.primary-button.icon-button {
+  align-items: center;
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  margin-left: auto;
+  min-width: unset;
+  padding: 0;
+  text-align: center;
+  width: 2rem;
 }
 
 .ghost-button {
@@ -150,7 +204,7 @@ button:disabled {
   border: 1px solid var(--dark-gray);
 }
 
-.form input, .form textarea, form .submit-button {
+.form input, .form textarea, form .submit-button, .primary-button {
   background-color: var(--white);
   border-radius: 4px;
   color: var(--dark-gray);
@@ -182,7 +236,7 @@ button:disabled {
   color: var(--medium-gray);
   font-size: 0.8rem;
   margin: 0;
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
   overflow: hidden;
   position: relative;
   text-align: center;
@@ -201,12 +255,36 @@ button:disabled {
   color: var(--medium-gray);
 }
 
-.copy-link:not(.confirm) span.confirmation,
-.copy-link.confirm span:not(.confirmation) {
+.copy-link:not(.confirm) .confirmation,
+.copy-link.confirm .copy-link-label {
   display: none;
 }
 
-.copy-link.confirm span.confirmation,
-.copy-link:not(.confirm) span:not(.confirmation) {
+.copy-link.confirm .confirmation,
+.copy-link:not(.confirm) .copy-link-label {
   display: block;
+}
+
+.info-icon {
+  display: inline-flex;
+  margin-left: 0.2rem;
+}
+
+.info-icon i {
+  background-color: var(--dark-gray);
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
+  display: block;
+  font-family: serif;
+  height: 1rem;
+  width: 1rem;
+}
+
+.copy-link #copy-button:disabled ~ .info-icon {
+  pointer-events: none;
+}
+
+.copy-link #copy-button:disabled ~ .info-icon i {
+  background-color: var(--light-gray);
 }
