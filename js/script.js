@@ -16,8 +16,14 @@ const handleChange = (field) => (e) => {
   toggleSubmitButton();
 };
 
+const handleClear = () => {
+  message.text = "";
+  textInput.value = "";
+};
+
 const toggleSubmitButton = () => {
   submitButton.disabled = !message.isValid();
+  copyButton.disabled = !message.isValid();
 };
 
 const handleCopy = () => {
@@ -59,17 +65,19 @@ const documentHeight = () =>
     `${window.innerHeight}px`
   );
 
-const form = document.getElementById("form");
-const phoneInput = document.getElementById("phone");
-const textInput = document.getElementById("text");
-const submitButton = document.getElementById("submit-button");
+const clearButton = document.getElementById("clear-button");
 const copyButton = document.getElementById("copy-button");
 const copyLinkParagraph = document.getElementById("copy-link");
+const form = document.getElementById("form");
+const phoneInput = document.getElementById("phone");
+const submitButton = document.getElementById("submit-button");
+const textInput = document.getElementById("text");
 
 form.addEventListener("submit", handleSubmit);
 phoneInput.addEventListener("input", handleChange("phone"));
 textInput.addEventListener("input", handleChange("text"));
 copyButton.addEventListener("click", handleCopy);
+clearButton.addEventListener("click", handleClear);
 
 window.addEventListener("resize", documentHeight);
 documentHeight();

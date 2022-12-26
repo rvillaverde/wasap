@@ -39,19 +39,25 @@
       <div class="form-row">
         <label for="phone">Text</label>
         <textarea id="text" rows="6"></textarea>
+        <div class="input-legend">
+          <button class="ghost-button" id="clear-button" type="button">
+            clear
+          </button>
+        </div>
       </div>
       <div class="form-row">
         <div class="form-actions">
           <button class="submit-button" disabled id="submit-button" type="submit">Send</button>
           <p class="copy-link" id="copy-link">
             <span class="confirmation">
-              Link copied to clipboard! &check;
+              Link copied to clipboard!
             </span>
             <span>
-              or&nbsp;
-              <button class="ghost-button" id="copy-button" type="button">
-                copy link to clipboard
-              </button>.
+              or
+              <button class="ghost-button" disabled id="copy-button" type="button">
+                copy to clipboard
+              </button>
+              if you're offline.
             </span>
           </p>
         </div>
