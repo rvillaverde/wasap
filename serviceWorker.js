@@ -1,4 +1,4 @@
-const VERSION = 11;
+const VERSION = 12;
 const CACHE_NAME = `whatsapp-chat-v${VERSION}`;
 const assets = [
   "/",

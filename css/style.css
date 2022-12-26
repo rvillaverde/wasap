@@ -97,6 +97,7 @@ h1 {
   font-size: 1.6rem;
   line-height: 1.4rem;
   text-align: left;
+  user-select: none;
 }
 
 .header {
@@ -230,6 +231,7 @@ button:disabled {
 .form .form-actions {
   display: flex;
   flex-direction: column;
+  user-select: none;
 }
 
 .form .form-actions p {
@@ -248,11 +250,14 @@ button:disabled {
 
 .form .form-actions .confirmation {
   color: var(--primary-dark);
-  user-select: none;
 }
 
 .form .form-actions .ghost-button:disabled {
   color: var(--medium-gray);
+}
+
+.copy-link > p {
+  height: 1rem;
 }
 
 .copy-link:not(.confirm) .confirmation,
@@ -266,25 +271,26 @@ button:disabled {
 }
 
 .info-icon {
-  display: inline-flex;
-  margin-left: 0.2rem;
-}
-
-.info-icon i {
+  align-items: center;
   background-color: var(--dark-gray);
   border-radius: 50%;
-  color: var(--white);
   cursor: pointer;
-  display: block;
-  font-family: serif;
+  display: inline-flex;
   height: 1rem;
+  justify-content: center;
+  margin-left: 0.2rem;
+  vertical-align: top;
   width: 1rem;
 }
 
-.copy-link #copy-button:disabled ~ .info-icon {
-  pointer-events: none;
+.info-icon i {
+  color: var(--white);
+  font-family: serif;
+  font-size: 0.6rem;
+  line-height: 0.6rem;
 }
 
-.copy-link #copy-button:disabled ~ .info-icon i {
+.copy-link #copy-button:disabled ~ .info-icon {
   background-color: var(--light-gray);
+  pointer-events: none;
 }
