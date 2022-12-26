@@ -19,6 +19,7 @@ const handleChange = (field) => (e) => {
 const handleClear = () => {
   message.text = "";
   textInput.value = "";
+  textInput.focus();
 };
 
 const toggleSubmitButton = () => {
